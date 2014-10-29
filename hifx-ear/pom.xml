@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>hifx</artifactId>
+        <groupId>br.com.jfive.hifx</groupId>
+        <version>1.0.0</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>hifx-ear</artifactId>
+    <packaging>ear</packaging>
+
+    <name>Hifx EAR</name>
+
+    <dependencies>
+        <dependency>
+            <groupId>br.com.jfive.hifx</groupId>
+            <artifactId>hifx-service</artifactId>
+            <version>${parent.version}</version>
+            <type>ejb</type>
+        </dependency>
+        <dependency>
+            <groupId>br.com.jfive.hifx</groupId>
+            <artifactId>hifx-persistence</artifactId>
+            <version>${parent.version}</version>
+            <type>ejb</type>
+        </dependency>
+        <dependency>
+            <groupId>br.com.jfive.hifx</groupId>
+            <artifactId>hifx-domain</artifactId>
+            <version>${parent.version}</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>br.com.jfive.hifx</groupId>
+            <artifactId>hifx-web</artifactId>
+            <version>${parent.version}</version>
+            <type>war</type>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <finalName>${project.artifactId}</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.0.2</version>
+                <configuration>
+                    <source>${compileSource}</source>
+                    <target>${compileSource}</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.cargo</groupId>
+                <artifactId>cargo-maven2-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-ear-plugin</artifactId>
+                <configuration>
+                    <generateApplicationXml>false</generateApplicationXml>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                    <version>6</version>
+                    <defaultLibBundleDir>/lib</defaultLibBundleDir>
+                    <earSourceIncludes>/src/main/resources/log4j.properties</earSourceIncludes>
+                    <modules>
+                        <ejbModule>
+                            <groupId>br.com.jfive.hifx</groupId>
+                            <artifactId>hifx-service</artifactId>
+                        </ejbModule>
+                        <webModule>
+                            <groupId>br.com.jfive.hifx</groupId>
+                            <artifactId>hifx-web</artifactId>
+                            <bundleFileName>hifx-web.war</bundleFileName>
+                        </webModule>
+                        <ejbModule>
+                            <groupId>br.com.jfive.hifx</groupId>
+                            <artifactId>hifx-persistence</artifactId>
+                        </ejbModule>
+                        <jarModule>
+                            <groupId>br.com.jfive.hifx</groupId>
+                            <artifactId>hifx-domain</artifactId>
+                        </jarModule>
+                    </modules>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                        </manifest>
+                    </archive>
+                </configuration>
+
+            </plugin>
+        </plugins>
+    </build>
+</project>
