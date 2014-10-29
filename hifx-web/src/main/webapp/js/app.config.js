@@ -263,6 +263,26 @@
 		}; 
 		
 	};
+
+
+    /** Angular Config **/
+    $app = angular.module('app',[]).directive('initJsPage', function() {
+        return function(scope, element, attrs) {
+            angular.element('<script>pageSetUp();</script>').appendTo(element);
+        }
+    });
+
+    $app.config(function($routeProvider){
+        $routeProvider
+            .when("/",{controller:baseController, templateUrl: 'base.html'})
+            .otherwise({redirectTo: '/'});
+    });
+
+    function baseController($scope){
+        $scope.module = 'Dashboard';
+        $scope.page = 'My Dashboard 2';
+    }
+    /**/
 /*
  * END APP.CONFIG
  */
