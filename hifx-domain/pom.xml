@@ -32,12 +32,11 @@
             <groupId>javax</groupId>
             <artifactId>javaee-api</artifactId>
         </dependency>
+
     </dependencies>
 
     <build>
         <finalName>${project.artifactId}</finalName>
-
     </build>
-
 
 </project>
