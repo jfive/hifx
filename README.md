@@ -6,3 +6,5 @@ No Start do jboss colocar:
 Criar um datasource com o jndi:
     java:/hifx-datasource
 
+
+
